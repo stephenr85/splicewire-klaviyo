@@ -1,0 +1,25 @@
+{
+    "name": "tipofthespearco/tots-gen-klaviyo",
+    "description": "Klaviyo Integration for SpearGen",
+    "autoload": {
+        "psr-4": {
+            "SpearGen\\Klaviyo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stephen Rushing",
+            "email": "stephenr85@gmail.com"
+        }
+    ],
+    "require": {
+        "klaviyo/api": "^5.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SpearGen\\Klaviyo\\PackageServiceProvider"
+            ]
+        }
+    }
+}
