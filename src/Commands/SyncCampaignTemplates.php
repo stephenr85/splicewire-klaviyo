@@ -22,7 +22,7 @@ class SyncCampaignTemplates extends Command
      *
      * @var string
      */
-    protected $signature = 'klaviyo:sync-campaign-templates';
+    protected $signature = 'klaviyo:sync-campaign-templates {--accounts=}';
 
     /**
      * The console command description.
@@ -41,9 +41,10 @@ class SyncCampaignTemplates extends Command
      */
     public function handle()
     {
+        $syncAccounts = explode(',', $this->option('accounts') ?: '');
         // Get Klaviyo accounts
         foreach(config('speargen.klaviyo.accounts') as $key => $account) {
-
+            if($syncAccounts && !in_array($key, $syncAccounts)) continue;
 
             $filter = data_get($account, 'campaigns.filter');
             $filter = "and($filter,)";

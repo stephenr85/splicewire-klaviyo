@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "klaviyo/api": "^5.1",
+        "klaviyo/api": "^7.1",
         "league/html-to-markdown": "^5.1"
     },
     "extra": {
