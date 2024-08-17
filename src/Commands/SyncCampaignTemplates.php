@@ -1,6 +1,6 @@
 <?php
 
-namespace SpearGen\Klaviyo\Commands;
+namespace Splicewire\Klaviyo\Commands;
 
 use App\Models\SyncRef;
 use Illuminate\Console\Command;
@@ -8,8 +8,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use KlaviyoAPI\KlaviyoAPI;
 use League\HTMLToMarkdown\HtmlConverter;
-use SpearGen\Client\Requests\Fragments\CreateFragment;
-use SpearGen\Client\SpearGenConnector;
+use Splicewire\Client\Requests\Fragments\CreateFragment;
+use Splicewire\Client\SplicewireConnector;
 use Symfony\Component\DomCrawler\Crawler;
 
 class SyncCampaignTemplates extends Command
@@ -31,7 +31,7 @@ class SyncCampaignTemplates extends Command
      */
     protected $description = 'Sync all messages from configured accounts and campaign templates.';
 
-    public function __construct(public SpearGenConnector $spearGen)
+    public function __construct(public SplicewireConnector $splicewire)
     {
         parent::__construct();
     }
@@ -43,7 +43,7 @@ class SyncCampaignTemplates extends Command
     {
         $syncAccounts = explode(',', $this->option('accounts') ?: '');
         // Get Klaviyo accounts
-        foreach(config('speargen.klaviyo.accounts') as $key => $account) {
+        foreach(config('splicewire.klaviyo.accounts') as $key => $account) {
             if($syncAccounts && !in_array($key, $syncAccounts)) continue;
 
             $filter = data_get($account, 'campaigns.filter');
@@ -162,7 +162,7 @@ class SyncCampaignTemplates extends Command
 
                 $request = new CreateFragment();
                 $request->body()->merge($fragmentData);
-                $response = $this->spearGen->send($request);
+                $response = $this->splicewire->send($request);
                 $json = $response->json();
 
                 if(data_get($json, 'status') == 'error') {

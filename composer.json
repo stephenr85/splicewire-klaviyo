@@ -1,9 +1,9 @@
 {
-    "name": "tipofthespearco/tots-gen-klaviyo",
-    "description": "Klaviyo Integration for SpearGen",
+    "name": "rushing/splicewire-klaviyo",
+    "description": "Klaviyo Integration for Splicewire",
     "autoload": {
         "psr-4": {
-            "SpearGen\\Klaviyo\\": "src/"
+            "Splicewire\\Klaviyo\\": "src/"
         }
     },
     "authors": [
@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SpearGen\\Klaviyo\\PackageServiceProvider"
+                "Splicewire\\Klaviyo\\PackageServiceProvider"
             ]
         }
     }
